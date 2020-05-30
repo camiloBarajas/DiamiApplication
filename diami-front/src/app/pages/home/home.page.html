@@ -1,9 +1,9 @@
 <app-header [title]="'Consejos para ti'"></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div>
+  <div class="fade-in">
     <ion-card mode="ios">
-      <ion-slides pager="true">
+      <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let slide of slides">
           <img class="img-margin" [src]="slide.img" />
         </ion-slide>
@@ -11,11 +11,11 @@
     </ion-card>
   </div>
 
-  <ion-title class="title_news">Noticias Diami</ion-title>
+  <ion-title class="title_news fade-in">Noticias Diami</ion-title>
 
-  <div>
+  <div class="fade-in">
     <ion-card *ngIf="news" mode="ios">
-      <ion-slides>
+      <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let title of news.articles">
           <ion-grid>
             <ion-row>

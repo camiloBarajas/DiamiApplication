@@ -527,4 +527,12 @@ export class SlideAnimationService {
       }
     }
   };
+
+  public static slideOptions = {
+    slidesPerView: 1.1,
+    slidesPerColumn: 1,
+    slidesPerGroup: 1,
+    watchSlidesProgress: true,
+    spaceBetween: 10,
+  };
 }

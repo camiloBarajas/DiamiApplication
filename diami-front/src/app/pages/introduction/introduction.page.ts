@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SlideAnimationService } from 'src/app/utils/slide-animation.service';
 
 @Component({
   selector: 'app-introduction',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./introduction.page.scss']
 })
 export class IntroductionPage implements OnInit {
-  constructor() {}
+  slideOpts = null;
+
+  constructor() {
+    this.slideOpts = SlideAnimationService.animationCoverFlow;
+  }
 
   ngOnInit() {}
 }

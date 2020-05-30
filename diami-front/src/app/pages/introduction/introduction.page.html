@@ -1,5 +1,11 @@
 <ion-content class="ion-padding">
-  <ion-slides mode="md" pager="md" scrollbar="md" class="slide_style">
+  <ion-slides
+    mode="md"
+    pager="md"
+    scrollbar="md"
+    class="slide_style"
+    [options]="slideOpts"
+  >
     <ion-slide>
       <app-slide1 class="container_slide"></app-slide1>
     </ion-slide>
