@@ -10,7 +10,6 @@ export class HomePage {
   news;
 
   constructor(private newsService: NewsService) {
-
     this.getNews();
   }
 
@@ -27,11 +26,9 @@ export class HomePage {
   ];
 
   getNews() {
-    this.newsService.getNews().subscribe(
-      (res) => {
-        //console.log(res);
-        this.news = res;
-        //console.log(this.news);
+    this.newsService.getNews('co').subscribe(
+      (res: any) => {
+        this.news = res.data;
       },
       (err) => console.log(err)
     );

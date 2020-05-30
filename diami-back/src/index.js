@@ -22,7 +22,7 @@ mongo.start();
 
 // Middlewares para manejo de peticiones JSON
 server.app.use(bodyParser.json());
-server.app.use(bodyParser.urlencoded({ extended: true }));
+server.app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configuración de CORS
 server.app.use(cors({ origin: true, credentials: true }));

@@ -11,11 +11,11 @@
     </ion-card>
   </div>
 
-  <app-header [title]="'Noticias Diami'"></app-header>
+  <ion-title class="title_news">Noticias Diami</ion-title>
 
   <div>
     <ion-card *ngIf="news" mode="ios">
-      <ion-slides >
+      <ion-slides>
         <ion-slide *ngFor="let title of news.articles">
           <ion-grid>
             <ion-row>
@@ -28,15 +28,11 @@
               {{title.description}}
             </ion-row>
             <div class="verMas">
-
               <a [href]="title.url">Ver más</a>
             </div>
-
           </ion-grid>
         </ion-slide>
       </ion-slides>
     </ion-card>
   </div>
 </ion-content>
-
-

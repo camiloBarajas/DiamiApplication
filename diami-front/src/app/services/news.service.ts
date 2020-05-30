@@ -6,9 +6,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class NewsService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  getNews() {
-      return this.httpClient.get(`${environment.URINews}`);
-    }
+  getNews(country: string) {
+    return this.httpClient.get(`${environment.urlApi}/news?country=${country}`);
+  }
 }

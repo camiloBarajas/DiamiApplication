@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Aplicación BackEnd para GlobHack",
   "main": "src/index",
+  "engines": {
+    "node": "12.14.*",
+    "npm": "6.14.*"
+  },
   "scripts": {
     "start": "node src/index",
     "dev": "nodemon src/",
@@ -36,6 +40,7 @@
     "nodemon": "^2.0.4"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

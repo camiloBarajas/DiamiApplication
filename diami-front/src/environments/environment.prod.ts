@@ -1,8 +1,6 @@
 export const environment = {
   production: true,
-  urlApi: 'http://localhost:5000',
-  URINews:
-    'http://newsapi.org/v2/top-headlines?country=co&apiKey=02cb4cd473a94772b3065e1e5ead1751',
+  urlApi: 'https://app-diami.herokuapp.com',
   routes: {
     welcome: '',
     login: '/login',

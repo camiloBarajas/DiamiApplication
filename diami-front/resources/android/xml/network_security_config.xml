@@ -2,6 +2,6 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
-        <domain includeSubdomains="true">http://newsapi.org/v2/top-headlines</domain>
+        <domain includeSubdomains="true">https://app-diami.herokuapp.com</domain>
     </domain-config>
 </network-security-config>
