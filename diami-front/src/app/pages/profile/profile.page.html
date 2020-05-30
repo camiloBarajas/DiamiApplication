@@ -1,7 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Perfil'"></app-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
-<ion-content> </ion-content>
+  <img class="imgRedonda"  src="./assets/svg/diami_avatar.svg"/>
+
+
+<div>
+
+  <ion-card>
+    <div padding>
+      <ion-item>
+        <ion-input  name="name" type="text" placeholder="Nombre" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="email" type="email" placeholder="tucorreo@email.com" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="password" type="password" placeholder="Contraseña" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="telephone" type="text" placeholder="Teléfono" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="adress" type="text" placeholder="Dirección" ngModel required></ion-input>
+      </ion-item>
+    </div>
+    <div padding>
+      <ion-button (click)="logout();" size="small" expand="full">Cerrar sesión</ion-button>
+    </div>
+  </ion-card>
+</div>
+
+<img  src="./assets/svg/version.svg"/>
+
+
+</ion-content>
+
