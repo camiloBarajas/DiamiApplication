@@ -14,7 +14,7 @@
   <app-header [title]="'Noticias Diami'"></app-header>
 
   <div>
-    <ion-card *ngIf="news">
+    <ion-card *ngIf="news" mode="ios">
       <ion-slides >
         <ion-slide *ngFor="let title of news.articles">
           <ion-grid>
