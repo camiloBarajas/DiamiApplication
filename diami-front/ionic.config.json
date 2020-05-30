@@ -1,0 +1,7 @@
+{
+  "name": "diami-front",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,4 +1,6 @@
-# Recursos para App DiAmi (Imágenes, Iconos, Fuentes)
+# App DiAmi
+
+## Aplicación para concurso de GlobalHack
 
 ### Tecnologías aplicadas
 
