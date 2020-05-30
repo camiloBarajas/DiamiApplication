@@ -1,11 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>slide3</ion-title>
-  </ion-toolbar>
-</ion-header>
+
+<app-header [title]="'Ahora que ya '"></app-header>
+<ion-title class="title"> nos conocemos</ion-title>
+<div>
+  &nbsp;
+</div>
+<div>
+  &nbsp;
+</div>
 
 <ion-content>
-  <ion-button (click)="navigate()" expand="block" fill="clear" shape="round">
-    Siguiente
-  </ion-button>
+  <img  class="imgRedonda" src="./assets/svg/chat_icon.svg"  />
+
+
+  <div>
+    &nbsp;
+  </div>
+  <div><app-description
+    [description]="'Comencemos'"  >
+  </app-description></div>
 </ion-content>
+
+<app-action-button
+  [textButton]="'Siguiente'"
+  (actionButton)="navigate()"
+></app-action-button>
