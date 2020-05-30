@@ -4,6 +4,7 @@ import { ActionButtonComponent } from 'src/app/components/action-button/action-b
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { DescriptionComponent } from 'src/app/components/description/description.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ActionButtonComponent, HeaderComponent, DescriptionComponent],
@@ -13,6 +14,6 @@ import { DescriptionComponent } from 'src/app/components/description/description
     HeaderComponent,
     DescriptionComponent
   ],
-  imports: [CommonModule, IonicModule]
+  imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule]
 })
 export class SharedModule {}

@@ -6,6 +6,7 @@ import { DiamiPage } from './diami.page';
 
 import { DiamiPageRoutingModule } from './diami-routing.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     CommonModule,
     DiamiPageRoutingModule
   ],
-  declarations: [DiamiPage]
+  declarations: [DiamiPage, ChatComponent]
 })
 export class DiamiPageModule {}

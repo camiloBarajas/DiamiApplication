@@ -1,7 +1,52 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>diami</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Diami'"></app-header>
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center fade-in">
+  <div id="container">
+    <img src="./assets/svg/diami_avatar.svg" alt="" />
+  </div>
 
-<ion-content> </ion-content>
+  <app-description
+    [description]="'Pon a dormir a Diami, el te avisará cuando despierte del sueño.'"
+  >
+  </app-description>
+  <div style="text-align: -webkit-center;">
+    <!-- <ion-item class="input_name_diami" lines="none">
+      <ion-input
+        style="text-align: center;"
+        type="text"
+        placeholder="Nombre para tu Diami"
+        [(ngModel)]="diamiName"
+      ></ion-input>
+    </ion-item> -->
+
+    <ion-row style="margin-bottom: 20px; margin-top: 0;">
+      <ion-col size="4" *ngFor="let option of options"
+        ><ion-button class="btn_diami_option btn_circle_icon" (click)="selectOption(option)">
+          {{ option }}
+        </ion-button></ion-col
+      >
+    </ion-row>
+
+    <ion-row>
+      <ion-col offset="2" size="10" style="display: flex;">
+        <ion-item lines="none" class="input_name_diami">
+          <ion-icon
+            class="hearth_icon"
+            name="heart-sharp"
+            slot="start"
+          ></ion-icon>
+          <ion-input type="text" readonly
+            ><p style="text-align: center; width: 80%;">
+              <strong>Diami Life</strong>
+            </p></ion-input
+          >
+        </ion-item>
+        <img
+          class="circle_icon btn_circle_icon"
+          src="assets/svg/chat_icon.svg"
+          alt="chat"
+          (click)="openChat()"
+        />
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

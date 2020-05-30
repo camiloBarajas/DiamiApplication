@@ -1,14 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title></ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="login()" slot="icon-only">
-        <ion-icon slot="end" name="person"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-button (click)="dismiss()" expand="block" fill="clear" shape="round">
+      Cerrar Chat
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -23,8 +17,8 @@
         <!-- <b>Diami</b> -->
         <span>{{ message.message }}</span>
         <!-- <div class="time" text-right>
-            <br />{{ message.createdAt | date: 'short' }}
-          </div> -->
+          <br />{{ message.createdAt | date: 'short' }}
+        </div> -->
       </ion-col>
 
       <ion-col
@@ -36,8 +30,8 @@
         <!-- <b>Tú</b> -->
         <span>{{ message.message }}</span>
         <!-- <div class="time" text-right>
-            <br />{{ message.createdAt | date: 'short' }}
-          </div> -->
+          <br />{{ message.createdAt | date: 'short' }}
+        </div> -->
       </ion-col>
     </ion-row>
   </div>
