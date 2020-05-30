@@ -1,15 +1,15 @@
 {
   "name": "diami-front",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "version": "1.0.0",
+  "author": "Concurso GlobHack DiAmi",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start": "ionic serve",
+    "add": "ionic cordova platform add android",
+    "rm": "ionic cordova platform rm android",
+    "build": "ionic cordova build android",
+    "prod": "ionic cordova build android --prod",
+    "debug": "ionic cordova build android -l"
   },
   "private": true,
   "dependencies": {

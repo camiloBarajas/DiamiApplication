@@ -8,6 +8,6 @@ export class ConstantsService {
   public static TOKEN = 'token';
   public static USER = 'user';
   public static CHAT = 'chat';
-  public static CHAT_REGISTER = 'register';
+  public static CHAT_LOGIN = 'chat-login';
 
 }

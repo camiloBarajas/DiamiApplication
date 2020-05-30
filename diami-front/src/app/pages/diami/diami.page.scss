@@ -1,0 +1,42 @@
+.input_name_diami {
+  width: 70%;
+  max-width: 350px;
+  border-radius: 12px;
+  --background: #f0f0f0;
+  color: #0ea4c0;
+  position: sticky;
+}
+
+.btn_diami_option {
+  border-radius: 15px;
+  width: 75%;
+}
+
+.hearth_icon {
+  color: #db3037;
+  margin-right: 0;
+}
+
+.circle_icon {
+  width: 80px;
+  position: absolute;
+  right: 45px;
+  bottom: -9px;
+}
+
+.btn_circle_icon {
+  cursor: pointer;
+}
+
+.btn_circle_icon:active {
+  transform: translateY(4px);
+}
+
+#container {
+  text-align: center;
+
+  img {
+    width: 45%;
+    max-width: 300px;
+  }
+}

@@ -62,6 +62,7 @@ export class AuthService {
     this.storage.set(ConstantsService.USER, user);
     this.authState.next(true);
     // Método login Back
+    this.storage.remove(ConstantsService.CHAT_LOGIN);
 
     this.navCtrl.navigateRoot('/tabs/home', {
       animated: true

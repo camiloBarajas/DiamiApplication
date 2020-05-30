@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController, IonContent, NavController } from '@ionic/angular';
+import { ModalController, IonContent } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/services/auth.service';
 import { Storage } from '@ionic/storage';
 import { ConstantsService } from 'src/app/utils/constants.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.scss']
 })
-export class LoginPage implements OnInit {
+export class ChatComponent implements OnInit {
   message = '';
   messages = [];
   currentUser: string;
@@ -26,8 +26,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const messages =
-      (await this.storage.get(ConstantsService.CHAT_LOGIN)) || [];
+    const messages = (await this.storage.get(ConstantsService.CHAT)) || [];
     this.messages.push(...messages);
     this.socketConnection();
     this.scrollBottom();
@@ -41,16 +40,16 @@ export class LoginPage implements OnInit {
     this.socket.connect();
 
     this.currentUser = await this.auth.getUser();
-    this.socket.emit('init-chat-login', this.currentUser);
+    this.socket.emit('init-chat', this.currentUser);
 
-    this.socket.fromEvent('message-login').subscribe((data: any) => {
+    this.socket.fromEvent('message').subscribe((data: any) => {
       this.messages.push(...data);
       this.scrollBottom();
     });
   }
 
   sendMessage() {
-    this.socket.emit('send-message-login', {
+    this.socket.emit('send-message', {
       text: this.message,
       user: this.currentUser
     });
@@ -75,9 +74,5 @@ export class LoginPage implements OnInit {
         this.content.scrollToBottom();
       });
     }
-  }
-
-  login() {
-    this.auth.login(this.messages);
   }
 }
