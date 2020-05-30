@@ -216,3 +216,13 @@
     --ion-tab-bar-background: #1f1f1f;
   }
 }
+
+.modal_chat {
+  .modal-wrapper {
+    height: 85%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    bottom: 0;
+    position: absolute;
+  }
+}
