@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit {
     this.socket.emit('init-chat', this.currentUser);
 
     this.socket.fromEvent('message').subscribe((data: any) => {
-      this.messages.push(...data);
+      this.messages.push(data);
       this.scrollBottom();
     });
   }
