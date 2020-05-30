@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
 
   ionViewWillLeave() {
     this.socket.disconnect();
-    this.storage.set(ConstantsService.CHAT, this.messages);
+    this.storage.set(ConstantsService.CHAT_LOGIN, this.messages);
   }
 
   scrollBottom() {
