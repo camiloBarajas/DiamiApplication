@@ -12,6 +12,6 @@ export class Slide3Component implements OnInit {
   ngOnInit() {}
 
   navigate() {
-    this.navCtrl.navigateForward('/tabs/home');
+    this.navCtrl.navigateForward('/login');
   }
 }
