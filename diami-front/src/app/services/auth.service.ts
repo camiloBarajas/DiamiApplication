@@ -34,7 +34,7 @@ export class AuthService {
     this.storage.remove(ConstantsService.TOKEN);
     this.storage.remove(ConstantsService.USER);
     this.storage.remove(ConstantsService.CHAT);
-    this.storage.remove(ConstantsService.CHAT_REGISTER);
+    this.storage.remove(ConstantsService.CHAT_LOGIN);
     this.navCtrl.navigateRoot('', { animated: true });
     this.authState.next(false);
   }
