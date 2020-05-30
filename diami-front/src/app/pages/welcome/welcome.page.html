@@ -1,11 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>welcome</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Bienvenido'"></app-header>
 
-<ion-content>
-  <ion-button (click)="navigate()" expand="block" fill="clear" shape="round">
-    Siguiente
-  </ion-button>
+<ion-content class="ion-padding">
+
+  <div id="container">
+    <img src="./assets/svg/diami_avatar.svg" alt="">
+  </div>
+
+
+
+
+  <app-description
+    [description]="'Un gusto en conocerte, seré tu amigo virtual, conmigo podrás conversar en cualquier momento. Conozcamos la aplicación.'"
+  >
+  </app-description>
 </ion-content>
+
+<app-action-button
+  [textButton]="'Comencemos'"
+  (actionButton)="navigate()"
+></app-action-button>

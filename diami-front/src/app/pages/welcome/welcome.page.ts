@@ -14,4 +14,6 @@ export class WelcomePage implements OnInit {
   navigate() {
     this.navCtrl.navigateForward('/introduction');
   }
+
+
 }

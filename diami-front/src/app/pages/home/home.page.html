@@ -1,7 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Consejos para ti'"></app-header>
 
-<ion-content> </ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div>
+    <ion-card mode="ios">
+      <ion-slides pager="true">
+        <ion-slide *ngFor="let slide of slides">
+          <img class="img-margin" [src]="slide.img" />
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+  </div>
+
+  <app-header [title]="'Noticias Diami'"></app-header>
+
+  <div>
+    <ion-card *ngIf="news">
+      <ion-slides >
+        <ion-slide *ngFor="let title of news.articles">
+          <ion-grid>
+            <ion-row>
+              <h3><strong>{{title.title}}</strong></h3>
+            </ion-row>
+            <ion-row>
+              <img [src]="title.urlToImage" />
+            </ion-row>
+            <ion-row>
+              {{title.description}}
+            </ion-row>
+            <div class="verMas">
+
+              <a [href]="title.url">Ver más</a>
+            </div>
+
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+  </div>
+</ion-content>
+
+
