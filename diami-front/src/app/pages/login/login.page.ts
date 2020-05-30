@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
     this.socket.emit('init-chat-login', this.currentUser);
 
     this.socket.fromEvent('message-login').subscribe((data: any) => {
-      this.messages.push(...data);
+      this.messages.push(data);
       this.scrollBottom();
     });
   }
