@@ -10,12 +10,14 @@ import { IntroductionPage } from './introduction.page';
 import { Slide1Component } from './slide1/slide1.component';
 import { Slide2Component } from './slide2/slide2.component';
 import { Slide3Component } from './slide3/slide3.component';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
   imports: [
     FormsModule,
     IonicModule,
     CommonModule,
+    SharedModule,
     IntroductionPageRoutingModule
   ],
   declarations: [

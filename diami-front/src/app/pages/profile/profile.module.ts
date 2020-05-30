@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { ProfilePage } from './profile.page';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
   imports: [
     IonicModule,
     FormsModule,
     CommonModule,
+    SharedModule,
     ProfilePageRoutingModule,
     RouterModule.forChild([{ path: '', component: ProfilePage }])
   ],

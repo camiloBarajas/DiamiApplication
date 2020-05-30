@@ -13,9 +13,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 // Sockets
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SharedModule } from './modules/shared/shared.module';
 const config: SocketIoConfig = { url: environment.urlApi, options: {} };
 
 // Se habilita modo producción para evitar mensajes en consola
@@ -28,6 +29,7 @@ enableProdMode();
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    SharedModule,
     ReactiveFormsModule,
     IonicModule.forRoot({
       mode: 'md',
