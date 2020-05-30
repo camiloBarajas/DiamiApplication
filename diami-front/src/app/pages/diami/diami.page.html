@@ -19,9 +19,9 @@
     </ion-item> -->
 
     <ion-row style="margin-bottom: 20px; margin-top: 0;">
-      <ion-col size="4" *ngFor="let option of options"
-        ><ion-button class="btn_diami_option btn_circle_icon" (click)="selectOption(option)">
-          {{ option }}
+      <ion-col size="4" *ngFor="let option of options" 
+        ><ion-button class="btn_diami_option btn_circle_icon" (click)="selectOption(option)" color="primary" mode="ios" >
+          <ion-label style="color:white;">{{ option }}</ion-label>
         </ion-button></ion-col
       >
     </ion-row>
