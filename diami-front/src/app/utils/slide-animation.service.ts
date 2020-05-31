@@ -395,13 +395,13 @@ export class SlideAnimationService {
   };
 
   public static animationCoverFlow = {
-    slidesPerView: 1.1,
+    slidesPerView: 1,
     coverflowEffect: {
       rotate: 50,
       stretch: 0,
       depth: 100,
       modifier: 1,
-      slideShadows: true
+      slideShadows: false
     },
     on: {
       beforeInit() {

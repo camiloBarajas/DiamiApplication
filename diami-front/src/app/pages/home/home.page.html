@@ -22,7 +22,7 @@
               <h3><strong>{{title.title}}</strong></h3>
             </ion-row>
             <ion-row>
-              <img [src]="title.urlToImage" />
+              <img [src]="title.urlToImage | imagepipe" />
             </ion-row>
             <ion-row>
               {{title.description}}

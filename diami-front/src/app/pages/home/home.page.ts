@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from 'src/app/services/news.service';
 import { SlideAnimationService } from 'src/app/utils/slide-animation.service';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,8 @@ import { SlideAnimationService } from 'src/app/utils/slide-animation.service';
 export class HomePage implements OnInit {
   news: any;
   slideOpts = null;
+
+  @ViewChild(IonSlides) ionSlides: IonSlides;
 
   slides = [
     {
