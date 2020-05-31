@@ -17,48 +17,50 @@
   <div class="fade-in">
     <ion-card>
       <div padding *ngIf="user">
-        <ion-item>
-          <ion-label position="floating" color="secondary">Nombre</ion-label>
-          <ion-input
-            name="name"
-            type="text"
-            placeholder="Nombre"
-            [(ngModel)]="user.name"
-            readonly
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating" color="secondary"
-            >Correo electrónico</ion-label
-          >
-          <ion-input
-            name="email"
-            type="email"
-            placeholder="tucorreo@email.com"
-            [(ngModel)]="user.email"
-            readonly
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating" color="secondary">Género</ion-label>
-          <ion-input
-            name="gender"
-            type="text"
-            placeholder="Genero"
-            [(ngModel)]="user.gender"
-            readonly
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating" color="secondary">Edad</ion-label>
-          <ion-input
-            name="age"
-            type="text"
-            placeholder="Edad"
-            [(ngModel)]="user.age"
-            readonly
-          ></ion-input>
-        </ion-item>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label position="floating" color="secondary">Nombre</ion-label>
+            <ion-input
+              name="name"
+              type="text"
+              placeholder="Nombre"
+              [(ngModel)]="user.name"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="secondary"
+              >Correo electrónico</ion-label
+            >
+            <ion-input
+              name="email"
+              type="email"
+              placeholder="tucorreo@email.com"
+              [(ngModel)]="user.email"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="secondary">Género</ion-label>
+            <ion-input
+              name="gender"
+              type="text"
+              placeholder="Genero"
+              [(ngModel)]="user.gender"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" color="secondary">Edad</ion-label>
+            <ion-input
+              name="age"
+              type="text"
+              placeholder="Edad"
+              [(ngModel)]="user.age"
+              readonly
+            ></ion-input>
+          </ion-item>
+        </ion-list>
       </div>
       <div padding>
         <ion-button (click)="logout();" size="small" expand="full"
