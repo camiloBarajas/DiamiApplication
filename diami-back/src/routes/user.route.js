@@ -31,7 +31,9 @@ app.post('/user', [
     }
 
     const { name, email, password, role, gender, age, tokenFirebase } = req.body;
-    const img = gender.includes('mas') ? 'assets/svg/defaultM.svg' : 'assets/svg/defaultW.svg';
+    if (gender) {
+        req.body.img = gender.includes('mas') ? 'assets/svg/defaultM.svg' : 'assets/svg/defaultW.svg';
+    }
 
     const user = new User({
         name,
@@ -39,7 +41,7 @@ app.post('/user', [
         password: bcrypt.hashSync(password, 11),
         gender,
         age,
-        img,
+        img: req.body.img,
         role,
         tokenFirebase
     });

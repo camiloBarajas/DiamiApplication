@@ -45,7 +45,8 @@ const config: SocketIoConfig = { url: environment.urlApi, options: {} };
     IonicModule.forRoot({
       mode: 'md',
       animated: true,
-      persistConfig: true
+      persistConfig: true,
+      hardwareBackButton: false
     }),
     IonicStorageModule.forRoot(),
     SocketIoModule.forRoot(config)

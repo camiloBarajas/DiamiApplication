@@ -1,8 +1,15 @@
 <app-header [title]="'Perfil'"></app-header>
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="ion-text-center" style="height: 25%; max-height: 30%;">
+  <div
+    class="ion-text-center"
+    style="height: 25%; max-height: 30%;"
+    *ngIf="user"
+  >
     <ion-avatar style="margin: auto;">
-      <img class="imgRedonda" src="./assets/svg/diami_avatar.svg" />
+      <img
+        class="imgRedonda"
+        [src]="user.img ? user.img : 'assets/svg/defaultM.svg'"
+      />
     </ion-avatar>
     <!-- <div class="edit_">Editar</div> -->
   </div>

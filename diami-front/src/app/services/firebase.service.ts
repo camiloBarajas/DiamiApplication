@@ -26,7 +26,10 @@ export class FirebaseService {
       .getToken()
       .then((token) => {
         if (this.user.tokenFirebase !== token) {
-          this.auth.updateTokenFirebase(this.user.id, token).subscribe();
+          this.auth.updateTokenFirebase(this.user._id, token).subscribe(
+            (data) => console.log(data),
+            (err) => console.log(err)
+          );
         }
       })
       .catch(() => console.log('error obteniendo token firebase'));

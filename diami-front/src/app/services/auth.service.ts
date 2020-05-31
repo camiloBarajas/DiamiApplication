@@ -69,7 +69,7 @@ export class AuthService {
   }
 
   validateUser(data: any) {
-    const { isLogin, email, name } = data;
+    const { isLogin, email, name, gender, age } = data;
     data.password =
       data.password.length < 6 ? data.password.concat('000000') : data.password;
     if (isLogin) {
@@ -82,7 +82,9 @@ export class AuthService {
       const credentials = {
         name,
         email,
-        password: data.password
+        password: data.password,
+        gender,
+        age
       };
       return this.register(credentials);
     }
