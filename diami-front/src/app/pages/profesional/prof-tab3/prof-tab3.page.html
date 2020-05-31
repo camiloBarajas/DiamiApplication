@@ -6,10 +6,10 @@
     </ion-avatar>
   </div>
 
-  <div>
-    <ion-card *ngIf="user">
+  <div style="margin-top: 56px;">
+    <ion-card *ngIf="user" mode="ios" >
       <div padding>
-        <ion-item>
+        <ion-item lines="none">
           <ion-input
             name="name"
             type="text"
@@ -18,7 +18,7 @@
             required
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
           <ion-input
             name="email"
             type="email"
@@ -27,7 +27,7 @@
             readonly
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
           <ion-input
             name="telephone"
             type="text"
@@ -35,7 +35,7 @@
             [(ngModel)]="user.phone"
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
           <ion-input
             name="adress"
             type="text"
@@ -47,8 +47,8 @@
     </ion-card>
   </div>
 
-  <ion-card>
-    <ion-row style="margin-bottom: 10px; margin-top: 8px;" >
+  <ion-card mode="ios">
+    <ion-row  >
       <ion-col size="3" *ngFor="let option of options" style="margin:auto; text-align:center;"
         ><ion-button class="btn_diami_option" (click)="selectOption(option)" mode="ios">
           {{ option }}
@@ -66,7 +66,7 @@
       </ion-col>
     </ion-row>
   </ion-card>
-  <ion-card>
+  <ion-card mode="ios">
     <p style="text-align: center; width: 100%;">
       <strong>Directorio profesional</strong>
     </p>
@@ -77,5 +77,5 @@
       >Cerrar sesión</ion-button
     >
   </div>
-  <img src="./assets/svg/version.svg" />
+  <img src="./assets/svg/version.svg"  style="height: 90px; margin: auto; text-align: center; margin-left: 35px;"/>
 </ion-content>
