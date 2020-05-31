@@ -1,21 +1,29 @@
 const axios = require('axios').default;
+const User = require('../models/user.model');
 
-async function sendPushNotification(tokenFirebase, data) {
-    console.log('TOKEN --> ', tokenFirebase);
-    await axios
-        .post(`https://fcm.googleapis.com/fcm/send`, {
-            to: tokenFirebase,
-            notification: {
-                title: data.title,
-                text: data.text
-            }
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'key=AAAAvnv_VlU:APA91bFnntcy3FVKPp2bjfDplhrHxidYTT2agh5uXjocnvPqfsrN7kzxQQp_Ab4cPdATeF6QwqGLzNwTs2IS0O84320KOIX6b0WGwCD-lPLotRFSsbekFwab6cXUoY2_ezZ6xUxl582i'
-            }
-        }).then(response => console.log('RESPONSE FIREBASE --> ' + response))
-        .catch(err => console.log('ERROR FIREBASE --> ' + err));
+async function sendPushNotification(token, data) {
+    const user = await User.find({ role: 'PROFESSIONAL' }).exec();
+
+    if (user && user.length > 0) {
+        user.forEach(async u => {
+            const { tokenFirebase } = u;
+            await axios
+                .post(`https://fcm.googleapis.com/fcm/send`, {
+                    to: tokenFirebase,
+                    notification: {
+                        title: data.title,
+                        text: data.text
+                    }
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'key=AAAAvnv_VlU:APA91bFnntcy3FVKPp2bjfDplhrHxidYTT2agh5uXjocnvPqfsrN7kzxQQp_Ab4cPdATeF6QwqGLzNwTs2IS0O84320KOIX6b0WGwCD-lPLotRFSsbekFwab6cXUoY2_ezZ6xUxl582i'
+                    }
+                }).then(response => console.log('RESPONSE FIREBASE --> ' + response))
+                .catch(err => console.log('ERROR FIREBASE --> ' + err));
+        });
+    }
+
 }
 
 module.exports = sendPushNotification;
