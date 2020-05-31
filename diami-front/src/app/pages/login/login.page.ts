@@ -77,7 +77,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  login() {
-    this.auth.login(this.messages);
+  async login() {
+    await this.auth.login(this.messages);
   }
 }

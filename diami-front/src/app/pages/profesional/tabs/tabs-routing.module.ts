@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { RoleGuard } from 'src/app/guards/role.guard';
-import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,22 +8,25 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'home',
+        path: 'requests',
         loadChildren: () =>
-          import('../home/home.module').then((m) => m.HomePageModule),
-        canLoad: [AuthGuard, RoleGuard]
+          import('../prof-tab1/prof-tab1.module').then(
+            (m) => m.ProfTab1PageModule
+          )
       },
       {
-        path: 'diami',
+        path: 'history',
         loadChildren: () =>
-          import('../diami/diami.module').then((m) => m.DiamiPageModule),
-        canLoad: [AuthGuard]
+          import('../prof-tab2/prof-tab2.module').then(
+            (m) => m.ProfTab2PageModule
+          )
       },
       {
-        path: 'profile',
+        path: 'prof-profile',
         loadChildren: () =>
-          import('../profile/profile.module').then((m) => m.ProfilePageModule),
-        canLoad: [AuthGuard]
+          import('../prof-tab3/prof-tab3.module').then(
+            (m) => m.ProfTab3PageModule
+          )
       }
     ]
   },

@@ -18,11 +18,19 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () =>
       import('./pages/tabs/tabs.module').then((m) => m.TabsPageModule)
-  },  {
+  },
+  {
+    path: 'prof',
+    loadChildren: () =>
+      import('./pages/profesional/tabs/tabs.module').then(
+        (m) => m.TabsProfPageModule
+      )
+  },
+  {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule)
   }
-
 ];
 @NgModule({
   imports: [

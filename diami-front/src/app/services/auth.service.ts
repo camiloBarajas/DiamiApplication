@@ -47,7 +47,7 @@ export class AuthService {
     this.navCtrl.navigateForward('/login', { animated: true });
   }
 
-  login(infoUser: any[]) {
+  async login(infoUser: any[]) {
     this.storage.set(
       ConstantsService.TOKEN,
       'asd87gasd465g1asd5649a79846asd21g8a4sd9g478'
@@ -59,10 +59,10 @@ export class AuthService {
       role: 'USER',
       state: true
     };
-    this.storage.set(ConstantsService.USER, user);
+    await this.storage.set(ConstantsService.USER, user);
     this.authState.next(true);
     // Método login Back
-    this.storage.remove(ConstantsService.CHAT_LOGIN);
+    await this.storage.remove(ConstantsService.CHAT_LOGIN);
 
     this.navCtrl.navigateRoot('/tabs/home', {
       animated: true
