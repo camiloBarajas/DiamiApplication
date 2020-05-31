@@ -5,38 +5,40 @@ const _nlp = new nlp();
 
 io.on('connection', (client) => {
 
-    client.on('init-chat-login', (user, callback) => {
-        console.log('init-chat-login', user);
-
-        client.emit('message-login', _nlp.test());
+    client.on('init-chat-login', (userId, callback) => {        
+        _nlp.initChatNlpLogin(client);        
     });
 
-    client.on('init-chat', (user, callback) => {
-        console.log('init-chat', user);
+    client.on('init-chat', (userId, callback) => {
+        console.log(userId);
 
-        client.emit('message', {
+       // _nlp.initChatNlpLogin(client);    
+
+        /*client.emit('message', {
             user: client.id,
             type: 'BOT',
             message: 'Hola de nuevo',
             createdAt: new Date()
-        });
+        });*/
+    });
+
+    client.on('disconnect', () => {
+        console.log('Usuario desconectado');
     });
 
     client.on('send-message-login', (msj, callback) => {
-        let { text } = msj;
-        if (text.toLowerCase() === 'nuevo' || text.toLowerCase() === 'nueva') {
-            text = '¿Como te llamas?';
-        } else if (text.toLowerCase().includes('cuenta')) {
-            text = 'Súper, por favor dime tú correo';
-        }
-        setTimeout(() => {
+
+
+        _nlp.initChatNlpLoginMessage(client,msj.text.trim());   
+
+        /*setTimeout(() => {
             client.emit('message-login', {
                 user: client.id,
                 type: 'BOT',
-                message: text,
+                message: msj.text,
                 createdAt: new Date()
             });
-        }, 2000);
+        }, 2000);*/
     });
 
     client.on('send-message', (msj, callback) => {
@@ -48,9 +50,5 @@ io.on('connection', (client) => {
                 createdAt: new Date()
             });
         }, 2000);
-    });
-
-    client.on('disconnect', () => {
-        console.log('Usuario desconectado');
     });
 });
