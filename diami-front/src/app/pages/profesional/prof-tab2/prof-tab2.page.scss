@@ -1,0 +1,48 @@
+.userName {
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(34, 34, 36);
+  }
+
+  ion-button {
+    --border-radius: 10px;
+    --background: rgb(55, 146, 70);
+    color:white;
+    
+  }
+
+.avatar {
+    border-radius: 10px;
+    max-width: 50px;
+    display: block;
+    float: left;
+    margin-right: 1rem;
+  }
+.icono {
+    border-radius: 10px;
+    max-width: 20px;
+    display: block;
+    float: rig;
+    margin-right: 1rem;
+  }
+
+  .gameStats span  {
+    margin-top: .5em;
+    font-size: 13px;
+    font-weight: bold;
+    color: #BBBCBE;
+  }
+  
+  .edad {
+   
+    margin-right: 10px;
+  }
+  
+  .riesgo {
+   
+    margin-right: .5em;
+  }
+  
+  .victima {
+    margin-right: .5em;
+  }
