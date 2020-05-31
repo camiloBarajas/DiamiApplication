@@ -301,6 +301,14 @@ class Nlp {
             }
 
             if (res.result.output.generic.length == 2) {
+
+              if (res.result.output.intents[0] == undefined)
+                  res.result.output.intents[0]={'intent': ''}
+
+                  if (res.result.output.entities[0] == undefined)
+                  res.result.output.entities[0]= {'entity':''};
+
+
               if (res.result.output.generic[0].text.includes('familia')) {
                 if (
                   res.result.output.entities[0].entity == 'no' ||
@@ -316,6 +324,8 @@ class Nlp {
                 ) {
                   factoresUsuario['autoestima']['entornoFamiliar'] = 0;
                 }
+
+                
 
                 if (
                   res.result.output.entities[0].entity == 'medio' ||
@@ -376,33 +386,28 @@ class Nlp {
               }
             }
 
-            if (user.gender=='masculino') user.gender=1
-            else user.gender=0
-
-            
-              
-            
+            if (user.gender == 'masculino') user.gender = 1;
+            else user.gender = 0;
 
             var prediccionRedNeuronal = redImported.activate([
-              user.age/90,
+              user.age / 90,
               user.gender,
               factoresUsuario['autoestima']['entornoFamiliar'],
               factoresUsuario['autoestima']['espejo'],
               factoresUsuario['autoestima']['satisfacion']
             ]);
 
-            if (((1 - prediccionRedNeuronal[0]) * 10) | (0 == 5)) {
+            var situation;
+
+            if ((((1 - prediccionRedNeuronal[0]) * 10) | 0) == 5) {
               situation = 'Riesgo Medio';
             } else {
-              if (((1 - prediccionRedNeuronal[0]) * 10) | (0 < 5)) {
+              if ((((1 - prediccionRedNeuronal[0]) * 10) | 0) < 5) {
                 situation = 'Riesgo Bajo';
               } else situation = 'Riesgo Alto';
             }
 
             if (situation != 'Riesgo Bajo') {
-
-
-
               Message.create({
                 idUser: user._id,
                 name: user.name,
@@ -410,12 +415,14 @@ class Nlp {
                 gender: user.gender,
                 age: user.age,
                 img: user.img,
-                tokenFirebase:user.tokenFirebase,
+                tokenFirebase: user.tokenFirebase,
                 situation: situation
-              })
+              });
 
-              sendPushNotification(user.tokenFirebase, { title: user.name, text: situation });
-
+              sendPushNotification(user.tokenFirebase, {
+                title: user.name,
+                text: situation
+              });
 
               /*client.emit('notification', {
                 id: user._id,
@@ -427,9 +434,6 @@ class Nlp {
                 situation: situation,
                 factoresUsuario: factoresUsuario['autoestima']
               });*/
-
-
-
             }
           })
           .catch((err) => {
