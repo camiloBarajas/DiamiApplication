@@ -1,9 +1,67 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>prof-tab3</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
+<app-header [title]="'Perfil'"></app-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-text-center"> 
+  <img class="img"  src="./assets/svg/diami_avatar.svg"/>
+  </div>
+
+<div>
+
+  <ion-card>
+    <div padding>
+      <ion-item>
+        <ion-input  name="name" type="text" placeholder="Nombre" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="email" type="email" placeholder="tucorreo@email.com" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="password" type="password" placeholder="Contraseña" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="telephone" type="text" placeholder="Teléfono" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input name="adress" type="text" placeholder="Dirección" ngModel required></ion-input>
+      </ion-item>
+    </div>
+
+
+</ion-card>
+
+</div>
+
+<ion-card>
+  <ion-row style="margin-bottom: 10px; margin-top: 8px;">
+    <ion-col size="4" *ngFor="let option of options"
+      ><ion-button class="btn_diami_option" (click)="selectOption(option)">
+        {{ option }} 
+      </ion-button>
+          
+    </ion-col >
+
+  <ion-col size="4"     >
+    Atendidos           
+  </ion-col >
+  <ion-col size="4"     >
+    En proceso           
+  </ion-col >
+  <ion-col size="4"     >
+    Solicitudes           
+  </ion-col >
+    
+  </ion-row>
+</ion-card>
+<ion-card>
+  <p style="text-align: center; width: 100%;">
+    <strong>Directorio profesional</strong>
+  </p>
+</ion-card>
+
+<div padding>
+  <ion-button (click)="logout();" size="small" expand="full">Cerrar sesión</ion-button>
+</div>
+<img  src="./assets/svg/version.svg"/>
+
 
 </ion-content>

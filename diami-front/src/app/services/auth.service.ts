@@ -56,7 +56,7 @@ export class AuthService {
       _id: '5ed144f78db3b9001714857e',
       name: 'Jefersson Gálvez',
       email: 'jhegalvez@gmail.com',
-      role: 'USER',
+      role: 'PROFESSIONAL',
       state: true
     };
     await this.storage.set(ConstantsService.USER, user);

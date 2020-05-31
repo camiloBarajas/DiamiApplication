@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-prof-tab3',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfTab3Page implements OnInit {
 
-  constructor() { }
+  options: string[];
+  funtions: string[];
+
+  constructor(private auth: AuthService) {
+  this.options = ['5', '3', '10'];
+  this.funtions = ['Atendidos', 'En proceso', 'Solicitudes'];
+  
+}
+
+selectOption(option: string) {}
+
 
   ngOnInit() {
+
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
 }

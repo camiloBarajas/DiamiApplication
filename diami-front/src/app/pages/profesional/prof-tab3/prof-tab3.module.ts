@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProfTab3PageRoutingModule } from './prof-tab3-routing.module';
 
 import { ProfTab3Page } from './prof-tab3.page';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfTab3PageRoutingModule
+    ProfTab3PageRoutingModule,
+    SharedModule
   ],
   declarations: [ProfTab3Page]
 })
