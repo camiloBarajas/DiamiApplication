@@ -51,6 +51,7 @@
     "mongoose": "^5.9.16",
     "mongoose-unique-validator": "^2.0.3",
     "socket.io": "^2.3.0",
+    "synaptic": "^1.1.4",
     "underscore": "^1.10.2"
   }
 }
