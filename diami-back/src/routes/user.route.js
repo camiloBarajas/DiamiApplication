@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 
 // Modelo de usuario
 const User = require('../models/user.model');
+const Message = require('../models/message.model');
 
 // Middlewares para validar token y rol
 const { tokenCreate, tokenVerify, roleVerify } = require('../middlewares/auth');
@@ -146,6 +147,37 @@ app.patch('/user/update/token', async function (req, res) {
         message: 'Actualización exitosa',
         token,
         user: response
+    });
+
+});
+
+/**
+ * Método get para los mensajes
+ */
+app.get('user/messages', async function (req, res) {
+
+    const { idUser } = req.params;
+
+    if (!idUser) {
+        return res.json({
+            ok: false,
+            err: 'El Id de usuario es requerido'
+        });
+    }
+
+    const messages = await Message.find({ _id: idUser });
+
+    if (!messages) {
+        return res.json({
+            ok: true,
+            message: 'No hay mensajes',
+        });
+    }
+
+    res.json({
+        ok: true,
+        message: 'Consulta exitosa',
+        data: messages
     });
 
 });
