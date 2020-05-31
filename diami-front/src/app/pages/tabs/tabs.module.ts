@@ -7,6 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { PipesModule } from 'src/app/modules/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     CommonModule,
     FormsModule,
     SharedModule,
+    PipesModule,
     TabsPageRoutingModule
   ],
   declarations: [TabsPage]

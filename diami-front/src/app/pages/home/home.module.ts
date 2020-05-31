@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { PipesModule } from 'src/app/modules/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     FormsModule,
     CommonModule,
     SharedModule,
+    PipesModule,
     HomePageRoutingModule
   ],
   declarations: [HomePage]

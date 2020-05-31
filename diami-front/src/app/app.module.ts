@@ -25,6 +25,7 @@ enableProdMode();
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
+  exports: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
