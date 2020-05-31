@@ -34,7 +34,7 @@ export class AppComponent {
     this.auth.authState.subscribe(async (state) => {
       if (state) {
         const role = await this.auth.getUser();
-        if (role.role === 'PROFESSIONAL') {
+        if (role && role.role === 'PROFESSIONAL') {
           this.router.navigate([environment.routes.tabsRequests]);
         } else {
           this.router.navigate([environment.routes.tabsHome]);

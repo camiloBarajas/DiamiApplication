@@ -14,27 +14,23 @@ export class LoginPage implements OnInit {
   message = '';
   messages = [];
   currentUser: string;
+  isFinishChat: boolean;
   // @ViewChild('scrollElement', { static: false }) content: IonContent;
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
   container: HTMLElement;
 
   constructor(
     private socket: Socket,
     private storage: Storage,
-    private auth: AuthService,
-    private modalCtrl: ModalController
+    private auth: AuthService
   ) {}
 
   async ngOnInit() {
-    const messages =
-      (await this.storage.get(ConstantsService.CHAT_LOGIN)) || [];
-    this.messages.push(...messages);
+    // const messages =
+    //   (await this.storage.get(ConstantsService.CHAT_LOGIN)) || [];
+    // this.messages.push(...messages);
     this.socketConnection();
     this.scrollBottom();
-  }
-
-  dismiss() {
-    this.modalCtrl.dismiss();
   }
 
   async socketConnection() {
@@ -44,8 +40,40 @@ export class LoginPage implements OnInit {
     this.socket.emit('init-chat-login', this.currentUser);
 
     this.socket.fromEvent('message-login').subscribe((data: any) => {
+      this.isFinishChat = true;
       this.messages.push(data);
       this.scrollBottom();
+    });
+
+    this.socket.fromEvent('login-success').subscribe((data: any) => {
+      this.isFinishChat = false;
+      this.auth.validateUser(data).subscribe(
+        (response: any) => {
+          if (!response.ok) {
+            this.messages.push({
+              user: this.currentUser,
+              type: 'BOT',
+              message: 'Ups, parece ser que: ' + response.message,
+              createdAt: new Date()
+            });
+            this.isFinishChat = true;
+            this.scrollBottom();
+          } else {
+            this.isFinishChat = true;
+            this.auth.navigateToPage(response);
+          }
+        },
+        (err) => {
+          this.isFinishChat = true;
+          this.messages.push({
+            user: this.currentUser,
+            type: 'BOT',
+            message: 'Algo ha fallado' + err.message,
+            createdAt: new Date()
+          });
+          this.scrollBottom();
+        }
+      );
     });
   }
 
@@ -66,18 +94,18 @@ export class LoginPage implements OnInit {
 
   ionViewWillLeave() {
     this.socket.disconnect();
-    this.storage.set(ConstantsService.CHAT_LOGIN, this.messages);
+    // this.storage.set(ConstantsService.CHAT_LOGIN, this.messages);
   }
 
   scrollBottom() {
-    if (this.content.scrollToBottom) {
+    if (this.content && this.content.scrollToBottom) {
       setTimeout(() => {
         this.content.scrollToBottom();
       });
     }
   }
 
-  async login() {
-    await this.auth.login(this.messages);
+  login() {
+    this.auth.login(this.messages);
   }
 }

@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit {
   messages = [];
   currentUser: string;
   // @ViewChild('scrollElement', { static: false }) content: IonContent;
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
   container: HTMLElement;
 
   constructor(
@@ -69,7 +69,7 @@ export class ChatComponent implements OnInit {
   }
 
   scrollBottom() {
-    if (this.content.scrollToBottom) {
+    if (this.content && this.content.scrollToBottom) {
       setTimeout(() => {
         this.content.scrollToBottom();
       });
