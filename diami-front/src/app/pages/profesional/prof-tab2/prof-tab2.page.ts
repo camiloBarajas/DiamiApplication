@@ -12,4 +12,6 @@ export class ProfTab2Page implements OnInit {
   ngOnInit() {
   }
 
+  descriptionHistorial="Eres una excelente psicóloga, nos da gusto que formes parte de nosotros, aquí puedes consultar tu historial";
+
 }

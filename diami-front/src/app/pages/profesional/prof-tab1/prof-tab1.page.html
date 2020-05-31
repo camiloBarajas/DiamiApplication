@@ -1,9 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>prof-tab1</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Solicitudes'"></app-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="avatar-header">
+        <img src="./assets/svg/diami_avatar.svg" />
+      </ion-col>
+      <ion-col class="text-description">
+        <strong> {{description}} </strong>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-card mode="ios">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-align-items-center ion-justify-content-between">
+          <ion-col>
+            <img  class="avatar" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            <h1 class="userName">Mauricio Lopez</h1>
+            <p class="gameStats" style="margin-left: 40px;">
+              <span class="edad">edad:</span><span class="riesgo">Riesgo</span><span class="victima">victima</span>
+           </p>
+          </ion-col>
+          <ion-col>
+            <ion-button>
+              <ion-icon slot="end"name="arrow-forward-outline" style="padding-left: 20px; text-align:center;"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

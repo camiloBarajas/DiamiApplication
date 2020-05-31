@@ -12,4 +12,6 @@ export class ProfTab1Page implements OnInit {
   ngOnInit() {
   }
 
+  description="Hola diana estas son tus solicitudes";
+
 }

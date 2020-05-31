@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProfTab2PageRoutingModule } from './prof-tab2-routing.module';
 
 import { ProfTab2Page } from './prof-tab2.page';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfTab2PageRoutingModule
+    ProfTab2PageRoutingModule,
+    SharedModule
   ],
   declarations: [ProfTab2Page]
 })
