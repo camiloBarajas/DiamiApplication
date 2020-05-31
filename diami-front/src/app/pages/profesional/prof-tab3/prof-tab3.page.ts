@@ -12,7 +12,7 @@ export class ProfTab3Page implements OnInit {
   funtions: string[];
 
   constructor(private auth: AuthService) {
-    this.options = ['5', '3', '10'];
+    this.options = ['5', '3', '8'];
     this.funtions = ['Atendidos', 'En proceso', 'Solicitudes'];
   }
 
