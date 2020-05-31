@@ -7,7 +7,7 @@ const Server = require('./server/server');
 const MongoConnection = require('./server/db');
 
 // Uso de variables de entorno en local (REMOVER PARA PASO A PRODUCCIÓN)
-require('dotenv').config();
+// require('dotenv').config();
 
 // Instancia del servidor
 const server = new Server();

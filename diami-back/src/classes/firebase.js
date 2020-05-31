@@ -1,6 +1,7 @@
 const axios = require('axios').default;
 
 async function sendPushNotification(tokenFirebase, data) {
+    console.log('TOKEN --> ', tokenFirebase);
     await axios
         .post(`https://fcm.googleapis.com/fcm/send`, {
             to: tokenFirebase,
