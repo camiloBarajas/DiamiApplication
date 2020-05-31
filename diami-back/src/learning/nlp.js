@@ -1,6 +1,25 @@
 const AssistantV2 = require('ibm-watson/assistant/v2');
 const { IamAuthenticator } = require('ibm-watson/auth');
 const axios = require('axios');
+const fs = require('fs') ;
+var synaptic = require('synaptic');
+var Neuron = synaptic.Neuron,
+	Layer = synaptic.Layer,
+	Network = synaptic.Network,
+	Trainer = synaptic.Trainer,
+	Architect = synaptic.Architect;
+
+var redImported = '';
+
+fs.readFile('./modelNeuralNetwork.json', 'utf8', function readFileCallback(err, data){
+  if (err){
+      console.log(err);
+  } else {
+  obj = JSON.parse(data); //now it an object
+  redImported=Network.fromJSON(obj);
+  console.log(redImported.activate([0.388888889,0,1,1,1])[0].toFixed(1))
+
+}});
 
 const assistant = new AssistantV2({
   version: '2020-04-01',
@@ -155,9 +174,11 @@ class Nlp {
                 name: newUserTemp['name'],
                 email: newUserTemp['email'],
                 password: msj,
+                gender:genderDetected,
+                age:age,
                 isLogin: false
               });
-            }, 2000);
+            }, 3000);
 
             setTimeout(() => {
               newUserTemp = {
@@ -172,7 +193,7 @@ class Nlp {
               };
               registroFlag = false;
               sesionFlag = false;
-            }, 3000);
+            }, 4000);
           })
           .catch((error) => {
             console.log(error);
