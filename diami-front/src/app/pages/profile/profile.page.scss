@@ -1,12 +1,17 @@
 .imgRedonda {
-    align-content: center;
-    width:100px;
-    height:100px;
-   
+  align-content: center;
+  width: 100px;
+  height: 100px;
 }
 
-.slide_style, .container_slide {
-    height: 100%;
-    width: 100%;
-    text-align: center;
+.slide_style,
+.container_slide {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.edit_ {
+  width: fit-content;
+  margin: auto;
 }

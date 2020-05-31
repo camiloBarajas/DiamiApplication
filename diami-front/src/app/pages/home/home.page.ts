@@ -47,8 +47,5 @@ export class HomePage implements OnInit {
   seeMore(url: string) {
     const browser = this.iab.create(url);
     browser.show();
-    browser.on('beforeload').subscribe((event) => {
-      browser.insertCSS({ code: 'body{color: red;' });
-    });
   }
 }

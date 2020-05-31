@@ -1,7 +1,10 @@
 <app-header [title]="'Perfil'"></app-header>
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="ion-text-center">
-    <img class="imgRedonda" src="./assets/svg/diami_avatar.svg" />
+  <div class="ion-text-center" style="height: 25%; max-height: 30%;">
+    <ion-avatar style="margin: auto;">
+      <img class="imgRedonda" src="./assets/svg/diami_avatar.svg" />
+    </ion-avatar>
+    <!-- <div class="edit_">Editar</div> -->
   </div>
 
   <div class="fade-in">
@@ -13,7 +16,6 @@
             type="text"
             placeholder="Nombre"
             [(ngModel)]="user.name"
-            required
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -40,7 +42,6 @@
             type="text"
             placeholder="Teléfono"
             [(ngModel)]="user.phone"
-            required
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -49,7 +50,6 @@
             type="text"
             placeholder="Dirección"
             [(ngModel)]="user.address"
-            required
           ></ion-input>
         </ion-item>
       </div>
