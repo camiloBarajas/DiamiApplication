@@ -11,6 +11,7 @@ var Neuron = synaptic.Neuron,
   Architect = synaptic.Architect;
 
 var redImported = '';
+const sendPushNotification = require('../classes/firebase');
 
 fs.readFile('./modelNeuralNetwork.json', 'utf8', function readFileCallback(
   err,
