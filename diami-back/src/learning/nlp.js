@@ -1,5 +1,6 @@
 const AssistantV2 = require('ibm-watson/assistant/v2');
 const { IamAuthenticator } = require('ibm-watson/auth');
+const axios = require('axios');
 
 const assistant = new AssistantV2({
   version: '2020-04-01',
@@ -14,6 +15,7 @@ const assistantId = 'c9fc6893-4a2c-4e0c-a284-d8f08e9ab7c1';
 
 var newUserTemp = {
     session_id: '',
+    date: '',
     name: '',
     email: '',
     password: '',
@@ -38,6 +40,7 @@ class Nlp {
   initChatNlpLogin(client) {
     newUserTemp = {
       session_id: '',
+      date: '',
       name: '',
       email: '',
       password: '',
@@ -102,6 +105,7 @@ class Nlp {
       setTimeout(() => {
         newUserTemp = {
           session_id: '',
+          date: '',
           name: '',
           email: '',
           password: '',
@@ -113,7 +117,11 @@ class Nlp {
         sesionFlag = false;
       }, 2000);
     } else {
-      if (newUserTemp['email'] != '' && newUserTemp['name'] != '') {
+      if (
+        newUserTemp['email'] != '' &&
+        newUserTemp['name'] != '' &&
+        newUserTemp['date'] != ''
+      ) {
         newUserTemp['password'] = msj;
         client.emit('message-login', {
           user: '',
@@ -123,28 +131,52 @@ class Nlp {
         });
 
         console.log(newUserTemp);
-        setTimeout(() => {
-          client.emit('login-success', {
-            name: newUserTemp['name'],
-            email: newUserTemp['email'],
-            password: msj,
-            isLogin: false
-          });
-        }, 2000);
+        var age =
+          new Date().getFullYear() - parseInt(newUserTemp.date.split('-')[0]);
+        getGender(newUserTemp.name.split(' ')[0])
+          .then((response) => {
+            
+            if (response.data.gender=='female') var genderDetected='femenino';
+            else{
 
-        setTimeout(() => {
-          newUserTemp = {
-            session_id: '',
-            name: '',
-            email: '',
-            password: '',
-            img: '',
-            role: '',
-            messageTemp: ''
-          };
-          registroFlag = false;
-          sesionFlag = false;
-        }, 3000);
+              if (response.data.gender=='male') var genderDetected='masculino';                
+               else {
+
+                var genderDetected='noDetectado';  
+                console.log("genero no detectado")
+                
+              }
+
+
+            }   
+            
+            setTimeout(() => {
+              client.emit('login-success', {
+                name: newUserTemp['name'],
+                email: newUserTemp['email'],
+                password: msj,
+                isLogin: false
+              });
+            }, 2000);
+
+            setTimeout(() => {
+              newUserTemp = {
+                session_id: '',
+                date: '',
+                name: '',
+                email: '',
+                password: '',
+                img: '',
+                role: '',
+                messageTemp: ''
+              };
+              registroFlag = false;
+              sesionFlag = false;
+            }, 3000);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
         assistant
           .message({
@@ -173,6 +205,10 @@ class Nlp {
                     );
                     break;
 
+                  case 'sys-date':
+                    newUserTemp['date'] = entityDetected.value;
+                    break;
+
                   default:
                     console.log('Entidad desconocida');
                     break;
@@ -182,18 +218,24 @@ class Nlp {
 
             if (
               res.result.output.intents[0] != undefined &&
-              res.result.output.intents[0].intent == 'iniciarSesion'
+              res.result.output.intents[0].intent == 'iniciarSesion' &&
+              registroFlag == false
             )
               sesionFlag = true;
             else {
               if (
                 res.result.output.intents[0] != undefined &&
-                res.result.output.intents[0].intent == 'registroAPP'
+                res.result.output.intents[0].intent == 'registroAPP' &&
+                sesionFlag == false
               )
                 registroFlag = true;
             }
 
-            if (newUserTemp['email'] != '' && newUserTemp['name'] != '') {
+            if (
+              newUserTemp['email'] != '' &&
+              newUserTemp['name'] != '' &&
+              newUserTemp['date'] != ''
+            ) {
               newUserTemp['messageTemp'] = res.result.output.generic[0].text;
               res.result.output.generic[0].text =
                 'Pude anotar casi todo, finalmente cuál será tu contraseña?. Debe ser mayor a 6 caracteres. Digíta solo la contraseña porfavor';
@@ -213,7 +255,7 @@ class Nlp {
     }
   }
 
-  initChat(client, msj,user) {
+  initChat(client, msj, user) {
     createSessionInitChat()
       .then((res) => {
         assistant
@@ -270,25 +312,18 @@ class Nlp {
               }
             }
 
-            var total=factoresUsuario['autoestima']['entornoFamiliar'] +
-            factoresUsuario['autoestima']['espejo'] +
-            factoresUsuario['autoestima']['satisfacion'];
-            if (total>=6) {
-
-              var situation="Riesgo bajo";
-              if (total>=11 && total <=18) {
-
-                situation="Riesgo medio"
-                
-              }
-              else{
-
-                  if (total>=19 ) {
-
-                    situation="Riesgo Alto"
-                    
-                  }
-
+            var total =
+              factoresUsuario['autoestima']['entornoFamiliar'] +
+              factoresUsuario['autoestima']['espejo'] +
+              factoresUsuario['autoestima']['satisfacion'];
+            if (total >= 6) {
+              var situation = 'Riesgo bajo';
+              if (total >= 11 && total <= 18) {
+                situation = 'Riesgo medio';
+              } else {
+                if (total >= 19) {
+                  situation = 'Riesgo Alto';
+                }
               }
 
               client.emit('notification', {
@@ -296,11 +331,10 @@ class Nlp {
                 name: user.name,
                 email: user.email,
                 img: '',
-                phone:'',
-                edad:'',
-                situation:situation
+                phone: '',
+                edad: '',
+                situation: situation
               });
-
             }
           })
           .catch((err) => {
@@ -350,5 +384,15 @@ function createSessionInitChat() {
     } else resolve([]);
   });
 }
+
+const getGender = (name) => {
+  try {
+    return axios.get(
+      'https://api.genderize.io/?name=' + name + '&country_id=CO'
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 module.exports = Nlp;
