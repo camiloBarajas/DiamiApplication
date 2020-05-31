@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from 'src/app/services/news.service';
 import { SlideAnimationService } from 'src/app/utils/slide-animation.service';
 import { IonSlides } from '@ionic/angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-home',
@@ -26,8 +27,8 @@ export class HomePage implements OnInit {
     }
   ];
 
-  constructor(private newsService: NewsService) {
-    this.slideOpts = SlideAnimationService.animationCoverFlow;
+  constructor(private newsService: NewsService, private iab: InAppBrowser) {
+    this.slideOpts = SlideAnimationService.slideOptions;
   }
 
   ngOnInit() {
@@ -41,5 +42,13 @@ export class HomePage implements OnInit {
       },
       (err) => console.log(err)
     );
+  }
+
+  seeMore(url: string) {
+    const browser = this.iab.create(url);
+    browser.show();
+    browser.on('beforeload').subscribe((event) => {
+      browser.insertCSS({ code: 'body{color: red;' });
+    });
   }
 }

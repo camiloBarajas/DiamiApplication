@@ -529,10 +529,8 @@ export class SlideAnimationService {
   };
 
   public static slideOptions = {
-    slidesPerView: 1.1,
-    slidesPerColumn: 1,
-    slidesPerGroup: 1,
+    slidesPerView: 1.3,
     watchSlidesProgress: true,
-    spaceBetween: 10,
+    spaceBetween: 15,
   };
 }
