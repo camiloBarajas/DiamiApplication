@@ -16,6 +16,6 @@ export class ProfTab2Page implements OnInit {
 
   async ngOnInit() {
     this.user = await this.auth.getUser();
-    this.messages = await this.storage.get('messages');
+    // this.messages = await this.storage.get('messages');
   }
 }

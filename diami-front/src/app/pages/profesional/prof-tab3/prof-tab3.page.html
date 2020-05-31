@@ -7,18 +7,22 @@
   </div>
 
   <div style="margin-top: 56px;">
-    <ion-card *ngIf="user" mode="ios" >
+    <ion-card *ngIf="user" mode="ios">
       <div padding>
-        <ion-item lines="none">
+        <ion-item>
+          <ion-label position="floating" color="secondary">Nombre</ion-label>
           <ion-input
             name="name"
             type="text"
             placeholder="Nombre"
             [(ngModel)]="user.name"
-            required
+            readonly
           ></ion-input>
         </ion-item>
-        <ion-item lines="none">
+        <ion-item>
+          <ion-label position="floating" color="secondary"
+            >Correo electrónico</ion-label
+          >
           <ion-input
             name="email"
             type="email"
@@ -27,20 +31,24 @@
             readonly
           ></ion-input>
         </ion-item>
-        <ion-item lines="none">
+        <ion-item>
+          <ion-label position="floating" color="secondary">Género</ion-label>
           <ion-input
-            name="telephone"
+            name="gender"
             type="text"
-            placeholder="Teléfono"
-            [(ngModel)]="user.phone"
+            placeholder="Genero"
+            [(ngModel)]="user.gender"
+            readonly
           ></ion-input>
         </ion-item>
-        <ion-item lines="none">
+        <ion-item>
+          <ion-label position="floating" color="secondary">Edad</ion-label>
           <ion-input
-            name="adress"
+            name="age"
             type="text"
-            placeholder="Dirección"
-            [(ngModel)]="user.address"
+            placeholder="Edad"
+            [(ngModel)]="user.age"
+            readonly
           ></ion-input>
         </ion-item>
       </div>
@@ -48,20 +56,28 @@
   </div>
 
   <ion-card mode="ios">
-    <ion-row  >
-      <ion-col size="3" *ngFor="let option of options" style="margin:auto; text-align:center;"
-        ><ion-button class="btn_diami_option" (click)="selectOption(option)" mode="ios">
+    <ion-row size="12">
+      <ion-col
+        size="4"
+        *ngFor="let option of options"
+        style="margin: auto; text-align: center;"
+        ><ion-button
+          class="btn_diami_option"
+          (click)="selectOption(option)"
+          mode="ios"
+        >
           {{ option }}
         </ion-button>
       </ion-col>
-     
-      <ion-col size="3" style="margin-left: 20px;">
+    </ion-row>
+    <ion-row size="12">
+      <ion-col size="4" style="margin: auto; text-align: center;">
         Atendidos
       </ion-col>
-      <ion-col size="3" style="margin-left: 25px">
+      <ion-col size="4" style="margin: auto; text-align: center;">
         En proceso
       </ion-col>
-      <ion-col size="3" style="margin-left: 25px;">
+      <ion-col size="4" style="margin: auto; text-align: center;">
         Solicitudes
       </ion-col>
     </ion-row>
@@ -70,12 +86,19 @@
     <p style="text-align: center; width: 100%;">
       <strong>Directorio profesional</strong>
     </p>
-
   </ion-card>
   <div padding>
-    <ion-button (click)="logout();" mode="ios" size="medium" expand="block" style="color:white;margin-top: 30px;"
+    <ion-button
+      (click)="logout();"
+      mode="ios"
+      size="medium"
+      expand="block"
+      style="color: white; margin-top: 30px;"
       >Cerrar sesión</ion-button
     >
   </div>
-  <img src="./assets/svg/version.svg"  style="height: 90px; margin: auto; text-align: center; margin-left: 35px;"/>
+  <img
+    src="./assets/svg/version.svg"
+    style="height: 90px; margin: auto; text-align: center; margin-left: 35px;"
+  />
 </ion-content>
