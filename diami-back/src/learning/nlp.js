@@ -1,25 +1,28 @@
 const AssistantV2 = require('ibm-watson/assistant/v2');
 const { IamAuthenticator } = require('ibm-watson/auth');
 const axios = require('axios');
-const fs = require('fs') ;
+const fs = require('fs');
+const Message = require('../models/message.model');
 var synaptic = require('synaptic');
 var Neuron = synaptic.Neuron,
-	Layer = synaptic.Layer,
-	Network = synaptic.Network,
-	Trainer = synaptic.Trainer,
-	Architect = synaptic.Architect;
+  Layer = synaptic.Layer,
+  Network = synaptic.Network,
+  Trainer = synaptic.Trainer,
+  Architect = synaptic.Architect;
 
 var redImported = '';
 
-fs.readFile('./modelNeuralNetwork.json', 'utf8', function readFileCallback(err, data){
-  if (err){
-      console.log(err);
+fs.readFile('./modelNeuralNetwork.json', 'utf8', function readFileCallback(
+  err,
+  data
+) {
+  if (err) {
+    console.log(err);
   } else {
-  obj = JSON.parse(data); //now it an object
-  redImported=Network.fromJSON(obj);
-  console.log(redImported.activate([0.388888889,0,1,1,1])[0].toFixed(1))
-
-}});
+    obj = JSON.parse(data); //now it an object
+    redImported = Network.fromJSON(obj);
+  }
+});
 
 const assistant = new AssistantV2({
   version: '2020-04-01',
@@ -154,28 +157,24 @@ class Nlp {
           new Date().getFullYear() - parseInt(newUserTemp.date.split('-')[0]);
         getGender(newUserTemp.name.split(' ')[0])
           .then((response) => {
-            
-            if (response.data.gender=='female') var genderDetected='femenino';
-            else{
-
-              if (response.data.gender=='male') var genderDetected='masculino';                
-               else {
-
-                var genderDetected='noDetectado';  
-                console.log("genero no detectado")
-                
+            if (response.data.gender == 'female')
+              var genderDetected = 'femenino';
+            else {
+              if (response.data.gender == 'male')
+                var genderDetected = 'masculino';
+              else {
+                var genderDetected = 'noDetectado';
+                console.log('genero no detectado');
               }
+            }
 
-
-            }   
-            
             setTimeout(() => {
               client.emit('login-success', {
                 name: newUserTemp['name'],
                 email: newUserTemp['email'],
                 password: msj,
-                gender:genderDetected,
-                age:age,
+                gender: genderDetected,
+                age: age,
                 isLogin: false
               });
             }, 3000);
@@ -307,7 +306,22 @@ class Nlp {
                   res.result.output.entities[0].entity == 'no' ||
                   res.result.output.entities[0].entity == 'poco'
                 ) {
-                  factoresUsuario['autoestima']['entornoFamiliar'] = 3;
+                  factoresUsuario['autoestima']['entornoFamiliar'] = 1;
+                }
+
+                if (
+                  res.result.output.entities[0].entity != 'no' &&
+                  (res.result.output.entities[0].entity == 'mucho' ||
+                    res.result.output.entities[0].entity == 'si')
+                ) {
+                  factoresUsuario['autoestima']['entornoFamiliar'] = 0;
+                }
+
+                if (
+                  res.result.output.entities[0].entity == 'medio' ||
+                  res.result.output.intents[0].intent == 'duda'
+                ) {
+                  factoresUsuario['autoestima']['entornoFamiliar'] = 0.5;
                 }
               }
 
@@ -316,7 +330,22 @@ class Nlp {
                   res.result.output.entities[0].entity == 'no' ||
                   res.result.output.entities[0].entity == 'poco'
                 ) {
-                  factoresUsuario['autoestima']['espejo'] = 3;
+                  factoresUsuario['autoestima']['espejo'] = 1;
+                }
+
+                if (
+                  res.result.output.entities[0].entity != 'no' &&
+                  (res.result.output.entities[0].entity == 'mucho' ||
+                    res.result.output.entities[0].entity == 'si')
+                ) {
+                  factoresUsuario['autoestima']['espejo'] = 0;
+                }
+
+                if (
+                  res.result.output.entities[0].entity == 'medio' ||
+                  res.result.output.intents[0].intent == 'duda'
+                ) {
+                  factoresUsuario['autoestima']['espejo'] = 0.5;
                 }
               }
 
@@ -328,34 +357,79 @@ class Nlp {
                   res.result.output.entities[0].entity == 'no' ||
                   res.result.output.entities[0].entity == 'poco'
                 ) {
-                  factoresUsuario['autoestima']['satisfacion'] = 3;
+                  factoresUsuario['autoestima']['satisfacion'] = 1;
+                }
+                if (
+                  res.result.output.entities[0].entity != 'no' &&
+                  (res.result.output.entities[0].entity == 'mucho' ||
+                    res.result.output.entities[0].entity == 'si')
+                ) {
+                  factoresUsuario['autoestima']['satisfacion'] = 0;
+                }
+
+                if (
+                  res.result.output.entities[0].entity == 'medio' ||
+                  res.result.output.intents[0].intent == 'duda'
+                ) {
+                  factoresUsuario['autoestima']['satisfacion'] = 0.5;
                 }
               }
             }
 
-            var total =
-              factoresUsuario['autoestima']['entornoFamiliar'] +
-              factoresUsuario['autoestima']['espejo'] +
-              factoresUsuario['autoestima']['satisfacion'];
-            if (total >= 6) {
-              var situation = 'Riesgo bajo';
-              if (total >= 11 && total <= 18) {
-                situation = 'Riesgo medio';
-              } else {
-                if (total >= 19) {
-                  situation = 'Riesgo Alto';
-                }
-              }
+            if (user.gender=='masculino') user.gender=1
+            else user.gender=0
 
-              client.emit('notification', {
+            
+              
+            
+
+            var prediccionRedNeuronal = redImported.activate([
+              user.age/90,
+              user.gender,
+              factoresUsuario['autoestima']['entornoFamiliar'],
+              factoresUsuario['autoestima']['espejo'],
+              factoresUsuario['autoestima']['satisfacion']
+            ]);
+
+            if (((1 - prediccionRedNeuronal[0]) * 10) | (0 == 5)) {
+              situation = 'Riesgo Medio';
+            } else {
+              if (((1 - prediccionRedNeuronal[0]) * 10) | (0 < 5)) {
+                situation = 'Riesgo Bajo';
+              } else situation = 'Riesgo Alto';
+            }
+
+            if (situation != 'Riesgo Bajo') {
+
+
+
+              Message.create({
+                idUser: user._id,
+                name: user.name,
+                email: user.email,
+                gender: user.gender,
+                age: user.age,
+                img: user.img,
+                tokenFirebase:user.tokenFirebase,
+                situation: situation
+              })
+
+              sendPushNotification(user.tokenFirebase, { title: user.name, text: situation });
+
+
+              /*client.emit('notification', {
                 id: user._id,
                 name: user.name,
                 email: user.email,
                 img: '',
                 phone: '',
                 edad: '',
-                situation: situation
-              });
+                situation: situation,
+                factoresUsuario: factoresUsuario['autoestima']
+              });*/
+
+
+
             }
           })
           .catch((err) => {
