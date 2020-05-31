@@ -7,26 +7,23 @@
   "
 >
   <ion-card-content class="ion-no-padding">
-    <ion-grid class="ion-no-padding">
+    <ion-grid class="ion-no-padding" *ngIf="user">
       <ion-row size="12" class="ion-no-padding">
         <ion-col size="3" style="margin: auto; text-align: -webkit-center;">
           <ion-avatar>
-            <img
-              [src]="
-                'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'
-              "
-            />
+            <img [src]="user.img ? user.img : 'assets/svg/defaultM.svg'" />
           </ion-avatar>
         </ion-col>
-        <ion-col size="7" style="margin: auto; text-align: center;">
-          <h1>Mauricio Lopez</h1>
+        <ion-col size="7" style="margin: auto; text-align: start;">
+          <h1>{{ user.name | titlecase }}</h1>
           <ion-row size="12">
-            <ion-col size="5" style="border-right: 1px solid;">23 años</ion-col>
+            <ion-col size="5">{{ user.age }}</ion-col>
             <ion-col size="7">Riesgo medio</ion-col>
           </ion-row>
         </ion-col>
         <ion-col size="2" style="text-align: end;">
           <ion-button
+            (click)="openModal(user)"
             class="ion-no-margin"
             style="
               height: 100px;

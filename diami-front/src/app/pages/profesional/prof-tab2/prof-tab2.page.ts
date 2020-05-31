@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-prof-tab2',
@@ -7,22 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfTab2Page implements OnInit {
   user: any;
+  messages = [];
   descriptionHistorial: string;
 
-  constructor() {
-    this.descriptionHistorial =
-      'Eres una excelente psicóloga, nos da gusto que formes parte de nosotros, aquí puedes consultar tu historial';
-  }
+  constructor(private auth: AuthService, private storage: Storage) {}
 
-  ngOnInit() {
-    this.user = {
-      id: '54a8sdae7aca2s31asd',
-      name: 'Jefersson Gálvez',
-      email: 'jhegalvez11@gmail.com',
-      img: '',
-      phone: '',
-      edad: 26,
-      situation: 'Riesgo medio'
-    };
+  async ngOnInit() {
+    this.user = await this.auth.getUser();
+    this.messages = await this.storage.get('messages');
   }
 }

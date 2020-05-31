@@ -18,9 +18,9 @@ export class NewsService {
     return this.httpClient.get(`${environment.urlApi}/news?country=${country}`);
   }
 
-  getNotificationsDB(userId: string) {
+  getNotificationsDB(idUser: string) {
     return this.httpClient.get(
-      `${environment.urlApi}/news/notifications/${userId}`,
+      `${environment.urlApi}/user/messages?idUser=${idUser}`,
       {
         headers: this.getHttpHeaders()
       }

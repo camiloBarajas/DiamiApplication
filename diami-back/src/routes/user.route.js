@@ -154,9 +154,9 @@ app.patch('/user/update/token', async function (req, res) {
 /**
  * Método get para los mensajes
  */
-app.get('user/messages', async function (req, res) {
+app.get('/user/messages', async function (req, res) {
 
-    const { idUser } = req.params;
+    const { idUser } = req.query;
 
     if (!idUser) {
         return res.json({
@@ -165,7 +165,7 @@ app.get('user/messages', async function (req, res) {
         });
     }
 
-    const messages = await Message.find({ _id: idUser });
+    const messages = await Message.find({ idUser });
 
     if (!messages) {
         return res.json({

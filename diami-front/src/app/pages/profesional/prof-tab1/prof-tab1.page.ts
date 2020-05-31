@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { NewsService } from 'src/app/services/news.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-prof-tab1',
@@ -9,22 +12,32 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class ProfTab1Page implements OnInit {
   user: any;
   description: string;
+  messages = [];
 
-  constructor(private firebase: FirebaseService) {
-    this.description = 'Hola diana estas son tus solicitudes';
+  constructor(
+    private firebase: FirebaseService,
+    private news: NewsService,
+    private auth: AuthService,
+    private storage: Storage
+  ) {}
+
+  async ngOnInit() {
+    this.user = await this.auth.getUser();
+    this.firebase.getToken();
+    this.getNews();
   }
 
-  ngOnInit() {
-    this.firebase.getToken();
-    this.user = {
-      id: '54a8sdae7aca2s31asd',
-      name: 'Jefersson Gálvez',
-      email: 'jhegalvez11@gmail.com',
-      img: '',
-      phone: '',
-      edad: 26,
-      situation: 'Riesgo medio',
-      process: 'NEW'
-    };
+  getNews() {
+    this.news.getNotificationsDB(this.user._id).subscribe(
+      (response: any) => {
+        if (response.ok) {
+          this.messages = response.data;
+          this.storage.set('messages', this.messages);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

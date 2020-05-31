@@ -8,32 +8,26 @@
       </ion-col>
       <ion-col size="8" class="text-description" style="margin: auto;">
         <p style="font-size: 22px; color: var(--ion-color-secondary);">
-          <strong> {{description}} </strong>
+          <strong *ngIf="user">
+            Hola {{ user.name | titlecase }} estas son tus solicitudes
+          </strong>
         </p>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-list lines="none">
+  <ion-list lines="none" *ngIf="messages.length > 0">
     <app-card-professional
+      *ngFor="let user of messages"
       [user]="user"
       [icon]="'arrow-forward-outline'"
     ></app-card-professional>
-    <app-card-professional
-      [user]="user"
-      [icon]="'arrow-forward-outline'"
-    ></app-card-professional>
-    <app-card-professional
-      [user]="user"
-      [icon]="'arrow-forward-outline'"
-    ></app-card-professional>
-    <app-card-professional
-      [user]="user"
-      [icon]="'arrow-forward-outline'"
-    ></app-card-professional>
-    <app-card-professional
-      [user]="user"
-      [icon]="'arrow-forward-outline'"
-    ></app-card-professional>
+  </ion-list>
+
+  <ion-list lines="none" *ngIf="messages.length === 0">
+    <div class="not_found_messages">
+      <img src="assets/svg/not_notify.svg" alt="empty" />
+      No tienes solicitudes por atender
+    </div>
   </ion-list>
 </ion-content>

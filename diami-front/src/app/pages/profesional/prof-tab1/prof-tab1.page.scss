@@ -8,3 +8,12 @@
   margin: auto;
   text-align: center;
 }
+
+.not_found_messages {
+  width: 75%;
+  max-width: 260px;
+  margin: auto;
+  text-align: center;
+  font-size: larger;
+  color: var(--ion-color-medium);
+}

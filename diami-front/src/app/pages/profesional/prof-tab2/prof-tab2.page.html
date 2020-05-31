@@ -4,26 +4,25 @@
   <div class="avatar-header">
     <img src="./assets/svg/GRACIAS.svg" />
   </div>
-  <div class="text-description">
-    <strong> {{descriptionHistorial}} </strong>
+  <div class="text-description" *ngIf="user">
+    <strong>
+      Eres {{ user.gender.includes('mas') ? 'un' : 'una' }} excelente {{
+      user.gender.includes('mas') ? 'psicólogo' : 'psicóloga' }}, nos da gusto
+      que formes parte de nosotros, aquí puedes consultar tu historial
+    </strong>
   </div>
 
-  <ion-list>
+  <ion-list lines="none" *ngIf="messages.length > 0">
     <app-card-professional
       [user]="user"
       [icon]="'checkmark-sharp'"
     ></app-card-professional>
-    <app-card-professional
-      [user]="user"
-      [icon]="'checkmark-sharp'"
-    ></app-card-professional>
-    <app-card-professional
-      [user]="user"
-      [icon]="'checkmark-sharp'"
-    ></app-card-professional>
-    <app-card-professional
-      [user]="user"
-      [icon]="'checkmark-sharp'"
-    ></app-card-professional>
+  </ion-list>
+
+  <ion-list lines="none" *ngIf="messages.length === 0">
+    <div class="not_found_messages">
+      <img src="assets/svg/not_notify.svg" alt="empty" />
+      No tienes solicitudes atendidas aún
+    </div>
   </ion-list>
 </ion-content>

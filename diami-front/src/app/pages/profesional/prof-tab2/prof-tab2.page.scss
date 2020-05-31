@@ -6,7 +6,6 @@
 }
 
 .text-description {
-
   text-align: center;
   color: #195e83;
   margin-top: 0;
@@ -59,3 +58,11 @@ ion-button {
   margin-right: 0.5em;
 }
 
+.not_found_messages {
+  width: 55%;
+  max-width: 175px;
+  margin: auto;
+  text-align: center;
+  font-size: larger;
+  color: var(--ion-color-medium);
+}
