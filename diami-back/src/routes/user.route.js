@@ -30,14 +30,18 @@ app.post('/user', [
         });
     }
 
-    const { name, email, password, img, role } = req.body;
+    const { name, email, password, role, gender, age, tokenFirebase } = req.body;
+    const img = gender.includes('mas') ? 'assets/svg/defaultM.svg' : 'assets/svg/defaultW.svg';
 
     const user = new User({
         name,
         email,
         password: bcrypt.hashSync(password, 11),
+        gender,
+        age,
         img,
-        role
+        role,
+        tokenFirebase
     });
 
     user.save((err, userDB) => {
@@ -48,7 +52,7 @@ app.post('/user', [
             });
         }
 
-        const response = _.pick(userDB, ['_id', 'name', 'email', 'img', 'role', 'state']);
+        const response = _.pick(userDB, ['_id', 'name', 'email', 'img', 'role', 'state', 'gender', 'age', 'tokenFirebase']);
         const token = tokenCreate(response);
 
         res.json({
@@ -88,7 +92,7 @@ app.post('/user/login', [
     }
 
     if (bcrypt.compareSync(password, user.password)) {
-        const response = _.pick(user, ['_id', 'name', 'email', 'img', 'role', 'state']);
+        const response = _.pick(user, ['_id', 'name', 'email', 'img', 'role', 'state', 'gender', 'age', 'tokenFirebase']);
         const token = tokenCreate(response);
 
         res.json({
@@ -103,6 +107,44 @@ app.post('/user/login', [
             message: 'Correo y/o contraseña incorrectos',
         });
     }
+
+});
+
+/**
+ * Método PATCH para actualizar token usuario
+ */
+app.patch('/user/update/token', async function (req, res) {
+
+    const { userId, tokenFirebase } = req.body;
+
+    const user = await User.findOne({ _id: userId }).exec();
+
+    if (!user) {
+        return res.json({
+            ok: false,
+            message: 'El usuario con el Id no existe',
+        });
+    }
+
+    if (!tokenFirebase) {
+        return res.json({
+            ok: false,
+            message: 'El Token de firebase es requerido',
+        });
+    }
+
+    user.tokenFirebase = tokenFirebase;
+    const userDB = await user.save();
+
+    const response = _.pick(userDB, ['_id', 'name', 'email', 'img', 'role', 'state', 'gender', 'age', 'tokenFirebase']);
+    const token = tokenCreate(response);
+
+    res.json({
+        ok: true,
+        message: 'Actualización exitosa',
+        token,
+        user: response
+    });
 
 });
 

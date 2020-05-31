@@ -3,6 +3,7 @@ import { NewsService } from 'src/app/services/news.service';
 import { SlideAnimationService } from 'src/app/utils/slide-animation.service';
 import { IonSlides } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -27,11 +28,16 @@ export class HomePage implements OnInit {
     }
   ];
 
-  constructor(private newsService: NewsService, private iab: InAppBrowser) {
+  constructor(
+    private newsService: NewsService,
+    private iab: InAppBrowser,
+    private firebase: FirebaseService
+  ) {
     this.slideOpts = SlideAnimationService.slideOptions;
   }
 
   ngOnInit() {
+    this.firebase.getToken();
     this.getNews();
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,7 +8,22 @@ import { environment } from 'src/environments/environment';
 export class NewsService {
   constructor(private httpClient: HttpClient) {}
 
+  private getHttpHeaders(): HttpHeaders {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return headers;
+  }
+
   getNews(country: string) {
     return this.httpClient.get(`${environment.urlApi}/news?country=${country}`);
+  }
+
+  getNotificationsDB(userId: string) {
+    return this.httpClient.get(
+      `${environment.urlApi}/news/notifications/${userId}`,
+      {
+        headers: this.getHttpHeaders()
+      }
+    );
   }
 }

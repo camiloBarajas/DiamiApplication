@@ -108,6 +108,17 @@ export class AuthService {
     }
   }
 
+  updateTokenFirebase(userId: string, tokenFirebase: string) {
+    return this.http.patch(
+      `${environment.urlApi}/user/update/token`,
+      {
+        userId,
+        tokenFirebase
+      },
+      { headers: this.getHttpHeaders() }
+    );
+  }
+
   async getUser(): Promise<any> {
     return await this.storage.get(ConstantsService.USER);
   }

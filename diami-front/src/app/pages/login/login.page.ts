@@ -13,9 +13,8 @@ import { ConstantsService } from 'src/app/utils/constants.service';
 export class LoginPage implements OnInit {
   message = '';
   messages = [];
-  currentUser: string;
+  currentUser: any;
   isFinishChat: boolean;
-  // @ViewChild('scrollElement', { static: false }) content: IonContent;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   container: HTMLElement;
 
@@ -26,9 +25,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // const messages =
-    //   (await this.storage.get(ConstantsService.CHAT_LOGIN)) || [];
-    // this.messages.push(...messages);
+    this.currentUser = await this.storage.get(ConstantsService.USER);
     this.socketConnection();
     this.scrollBottom();
   }
@@ -37,7 +34,7 @@ export class LoginPage implements OnInit {
     this.socket.connect();
 
     this.currentUser = await this.auth.getUser();
-    this.socket.emit('init-chat-login', this.currentUser);
+    this.socket.emit('init-chat-login', '');
 
     this.socket.fromEvent('message-login').subscribe((data: any) => {
       this.isFinishChat = true;

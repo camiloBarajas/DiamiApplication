@@ -19,6 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+// Firebase
+import { FCM } from '@ionic-native/fcm/ngx';
+
 // Configuración local de fecha
 registerLocaleData(localeCOL, 'es');
 
@@ -27,7 +30,7 @@ import { SharedModule } from './modules/shared/shared.module';
 const config: SocketIoConfig = { url: environment.urlApi, options: {} };
 
 // Se habilita modo producción para evitar mensajes en consola
-enableProdMode();
+// enableProdMode();
 
 @NgModule({
   declarations: [AppComponent],
@@ -50,6 +53,7 @@ enableProdMode();
   providers: [
     StatusBar,
     SplashScreen,
+    FCM,
     InAppBrowser,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

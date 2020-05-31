@@ -28,9 +28,17 @@ const UserSchema = new Schema({
     minlength: [6, 'La contraseña debe tener mínimo 6 carácteres'],
     required: [true, 'La contraseña es requerida']
   },
+  gender: {
+    type: String
+  },
+  age: {
+    type: Number
+  },
   img: {
-    type: String,
-    required: false
+    type: String
+  },
+  tokenFirebase: {
+    type: String
   },
   role: {
     type: String,
@@ -42,14 +50,11 @@ const UserSchema = new Schema({
     default: true
   },
   createdAt: {
-    type: Date
+    type: Date,
+    default: new Date()
   }
 });
 
-// Método que se dispara antes de guardar en base de datos mongo
-UserSchema.pre('save', () => {
-  this.createdAt = new Date();
-});
 
 // Función de validador para campos únicos
 UserSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });

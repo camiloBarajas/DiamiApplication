@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   urlApi: 'http://localhost:5000',
+  // urlApi: 'https://app-diami.herokuapp.com',
   routes: {
     welcome: '',
     login: '/login',

@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
 
+import { FCM } from '@ionic-native/fcm/ngx';
+import { FirebaseService } from './services/firebase.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,10 +17,12 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   constructor(
+    private fcm: FCM,
     private router: Router,
     private auth: AuthService,
     private platform: Platform,
     private statusBar: StatusBar,
+    private firebase: FirebaseService,
     private splashScreen: SplashScreen
   ) {
     this.initializeApp();
@@ -28,6 +33,7 @@ export class AppComponent {
       if (this.platform.is('cordova')) {
         this.statusBar.styleDefault();
         this.splashScreen.hide();
+        this.firebase.onNotification();
       }
     });
 

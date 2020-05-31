@@ -13,8 +13,8 @@ import { ConstantsService } from 'src/app/utils/constants.service';
 export class ChatComponent implements OnInit {
   message = '';
   messages = [];
-  currentUser: string;
-  // @ViewChild('scrollElement', { static: false }) content: IonContent;
+  currentUser: any;
+  isFinishChat: boolean;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   container: HTMLElement;
 
@@ -43,6 +43,7 @@ export class ChatComponent implements OnInit {
     this.socket.emit('init-chat', this.currentUser);
 
     this.socket.fromEvent('message').subscribe((data: any) => {
+      this.isFinishChat = true;
       this.messages.push(data);
       this.scrollBottom();
     });

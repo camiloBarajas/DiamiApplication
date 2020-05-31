@@ -11,14 +11,19 @@
     <ion-card>
       <div padding *ngIf="user">
         <ion-item>
+          <ion-label position="floating" color="secondary">Nombre</ion-label>
           <ion-input
             name="name"
             type="text"
             placeholder="Nombre"
             [(ngModel)]="user.name"
+            readonly
           ></ion-input>
         </ion-item>
         <ion-item>
+          <ion-label position="floating" color="secondary"
+            >Correo electrónico</ion-label
+          >
           <ion-input
             name="email"
             type="email"
@@ -27,29 +32,24 @@
             readonly
           ></ion-input>
         </ion-item>
-        <!-- <ion-item>
-          <ion-input
-            name="password"
-            type="password"
-            placeholder="Contraseña"
-            [(ngModel)]="user.name"
-            required
-          ></ion-input>
-        </ion-item> -->
         <ion-item>
+          <ion-label position="floating" color="secondary">Género</ion-label>
           <ion-input
-            name="telephone"
+            name="gender"
             type="text"
-            placeholder="Teléfono"
-            [(ngModel)]="user.phone"
+            placeholder="Genero"
+            [(ngModel)]="user.gender"
+            readonly
           ></ion-input>
         </ion-item>
         <ion-item>
+          <ion-label position="floating" color="secondary">Edad</ion-label>
           <ion-input
-            name="adress"
+            name="age"
             type="text"
-            placeholder="Dirección"
-            [(ngModel)]="user.address"
+            placeholder="Edad"
+            [(ngModel)]="user.age"
+            readonly
           ></ion-input>
         </ion-item>
       </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-prof-tab1',
@@ -9,11 +10,12 @@ export class ProfTab1Page implements OnInit {
   user: any;
   description: string;
 
-  constructor() {
+  constructor(private firebase: FirebaseService) {
     this.description = 'Hola diana estas son tus solicitudes';
   }
 
   ngOnInit() {
+    this.firebase.getToken();
     this.user = {
       id: '54a8sdae7aca2s31asd',
       name: 'Jefersson Gálvez',
