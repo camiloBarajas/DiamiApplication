@@ -57,31 +57,15 @@ export class AuthService {
   }
 
   register(infoUser: any) {
-    return this.http
-      .post(`${environment.urlApi}/user`, infoUser, {
-        headers: this.getHttpHeaders()
-      })
-      .pipe(
-        timeout(7000),
-        map((data: any) => {
-          // this.navigateToPage(data);
-          return data;
-        })
-      );
+    return this.http.post(`${environment.urlApi}/user`, infoUser, {
+      headers: this.getHttpHeaders()
+    });
   }
 
   login(infoUser: any) {
-    return this.http
-      .post(`${environment.urlApi}/user/login`, infoUser, {
-        headers: this.getHttpHeaders()
-      })
-      .pipe(
-        timeout(7000),
-        map((data: any) => {
-          // this.navigateToPage(data);
-          return data;
-        })
-      );
+    return this.http.post(`${environment.urlApi}/user/login`, infoUser, {
+      headers: this.getHttpHeaders()
+    });
   }
 
   validateUser(data: any) {
