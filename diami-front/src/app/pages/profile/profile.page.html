@@ -1,39 +1,65 @@
 <app-header [title]="'Perfil'"></app-header>
 <ion-content [fullscreen]="true" class="ion-padding">
-<div class="ion-text-center"> 
-   <img class="imgRedonda"  src="./assets/svg/diami_avatar.svg"/>
-</div>
+  <div class="ion-text-center">
+    <img class="imgRedonda" src="./assets/svg/diami_avatar.svg" />
+  </div>
 
+  <div class="fade-in">
+    <ion-card>
+      <div padding *ngIf="user">
+        <ion-item>
+          <ion-input
+            name="name"
+            type="text"
+            placeholder="Nombre"
+            [(ngModel)]="user.name"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            name="email"
+            type="email"
+            placeholder="tucorreo@email.com"
+            [(ngModel)]="user.email"
+            readonly
+          ></ion-input>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-input
+            name="password"
+            type="password"
+            placeholder="Contraseña"
+            [(ngModel)]="user.name"
+            required
+          ></ion-input>
+        </ion-item> -->
+        <ion-item>
+          <ion-input
+            name="telephone"
+            type="text"
+            placeholder="Teléfono"
+            [(ngModel)]="user.phone"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            name="adress"
+            type="text"
+            placeholder="Dirección"
+            [(ngModel)]="user.address"
+            required
+          ></ion-input>
+        </ion-item>
+      </div>
+      <div padding>
+        <ion-button (click)="logout();" size="small" expand="full"
+          >Cerrar sesión</ion-button
+        >
+      </div>
+    </ion-card>
+  </div>
 
-
-<div class="fade-in">
-
-  <ion-card>
-    <div padding>
-      <ion-item>
-        <ion-input  name="name" type="text" placeholder="Nombre" ngModel required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input name="email" type="email" placeholder="tucorreo@email.com" ngModel required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input name="password" type="password" placeholder="Contraseña" ngModel required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input name="telephone" type="text" placeholder="Teléfono" ngModel required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input name="adress" type="text" placeholder="Dirección" ngModel required></ion-input>
-      </ion-item>
-    </div>
-    <div padding>
-      <ion-button (click)="logout();" size="small" expand="full">Cerrar sesión</ion-button>
-    </div>
-  </ion-card>
-</div>
-
-<img  src="./assets/svg/version.svg"/>
-
-
+  <img src="./assets/svg/version.svg" />
 </ion-content>
-

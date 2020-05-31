@@ -1,6 +1,6 @@
 <app-header [title]="'Historial'"></app-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <div class="avatar-header">
     <img src="./assets/svg/GRACIAS.svg" />
   </div>
@@ -8,37 +8,22 @@
     <strong> {{descriptionHistorial}} </strong>
   </div>
 
-  <ion-content>
-    <ion-card mode="ios">
-      <ion-card-content>
-        <ion-grid>
-          <ion-row class="ion-align-items-center ion-justify-content-between">
-            <ion-col>
-              <img
-                class="avatar"
-                src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-              />
-              <h1 class="userName">Mauricio Lopez</h1>
-              <p class="gameStats" style="margin-left: 40px;">
-                <span class="edad">Ciudad</span>
-
-                <span class="riesgo">Fecha</span>
-
-                <span class="victima">Riesgo</span>
-              </p>
-            </ion-col>
-            <ion-col>
-              <ion-button>
-                <ion-icon
-                  slot="end"
-                  name="arrow-forward-outline"
-                  style="padding-left: 20px; text-align: center;"
-                ></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
+  <ion-list>
+    <app-card-professional
+      [user]="user"
+      [icon]="'checkmark-sharp'"
+    ></app-card-professional>
+    <app-card-professional
+      [user]="user"
+      [icon]="'checkmark-sharp'"
+    ></app-card-professional>
+    <app-card-professional
+      [user]="user"
+      [icon]="'checkmark-sharp'"
+    ></app-card-professional>
+    <app-card-professional
+      [user]="user"
+      [icon]="'checkmark-sharp'"
+    ></app-card-professional>
+  </ion-list>
 </ion-content>
